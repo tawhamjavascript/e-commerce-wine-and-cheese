@@ -10,8 +10,6 @@ type Comments struct {
 	DateCreated time.Time `bson:"dateCreated"`
 	Title       string    `bson:"title"`
 	Photo       string    `bson:"photo"`
-	Client      uuid.UUID `bson:"client"`
-	Product     uuid.UUID `bson:"product"`
 }
 
 type RegisterComments struct {

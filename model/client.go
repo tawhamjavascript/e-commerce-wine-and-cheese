@@ -12,9 +12,8 @@ type Client struct {
 	Phone     string             `bson:"phone"`
 	Uuid      uuid.UUID          `bson:"uuid"`
 	Email     string             `bson:"email"`
-	Purchases []uuid.UUID        `bson:"purchases"`
-	Comments  []uuid.UUID        `bson:"comments"`
-	Address   Address            `bson:"address"`
+	Purchases []Product          `bson:"purchases"`
+	Comments  []Comments         `bson:"comments"`
 }
 
 type SignUpClient struct {

@@ -5,14 +5,14 @@ import (
 )
 
 type Product struct {
-	Uuid        uuid.UUID   `bson:"id"`
-	Name        string      `bson:"name"`
-	Description string      `bson:"description"`
-	Price       string      `bson:"price"`
-	Photo       string      `bson:"photo"`
-	Rating      float64     `bson:"rating"`
-	Vendor      uuid.UUID   `bson:"vendor"`
-	Comments    []uuid.UUID `bson:"comments"`
+	Uuid        uuid.UUID  `bson:"id"`
+	Name        string     `bson:"name"`
+	Description string     `bson:"description"`
+	Price       string     `bson:"price"`
+	Photo       string     `bson:"photo"`
+	Rating      float64    `bson:"rating"`
+	Vendor      uuid.UUID  `bson:"vendor"`
+	Comments    []Comments `bson:"comments"`
 }
 
 type RegisterProduct struct {
