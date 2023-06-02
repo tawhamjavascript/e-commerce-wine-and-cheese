@@ -3,7 +3,6 @@ package vendorRepository
 import (
 	"e-commerce/db"
 	"e-commerce/model"
-	"fmt"
 	"github.com/valyala/fasthttp"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -17,7 +16,6 @@ func FilterVendor(c *fasthttp.RequestCtx, email string) (vendorSignIn *model.Sig
 		{"password", 1},
 		{"_id", 1},
 	})
-	fmt.Println(email)
 
 	err = db.Conn.Collections["vendor"].FindOne(c, filter, opts).Decode(&vendorSignIn)
 	if err != nil {

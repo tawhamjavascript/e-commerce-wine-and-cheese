@@ -4,8 +4,8 @@ import (
 	"e-commerce/model"
 	vendorRepository "e-commerce/repository/vendedor"
 	"e-commerce/service/messagesHttp"
-	vendorValidate "e-commerce/validate/vendedor"
-	"fmt"
+	"e-commerce/validate"
+
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -16,7 +16,7 @@ func Login(c *fiber.Ctx) *messagesHttp.MessageErro {
 	if err := c.BodyParser(&signInVendor); err != nil {
 		return messagesHttp.GetError(err)
 	}
-	if err := vendorValidate.ValidateLoginVendor(&signInVendor); err != nil {
+	if err := validate.ValidateLoginVendor(&signInVendor); err != nil {
 		return messagesHttp.GetError(err)
 	}
 
@@ -26,7 +26,6 @@ func Login(c *fiber.Ctx) *messagesHttp.MessageErro {
 	}
 	err = bcrypt.CompareHashAndPassword(user.Password, []byte(signInVendor.Password))
 	if err != nil {
-		fmt.Println("senha errada")
 
 		return messagesHttp.GetError(err)
 	}

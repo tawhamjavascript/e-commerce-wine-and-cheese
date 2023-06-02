@@ -2,9 +2,9 @@ POST http://localhost:8000/vendedor/cadastrar
 Content-Type: application/json
 
 {
-  "name": "tawham Almeida B",
+  "name": "tawham  Almeida B",
   "description": "arroz macarrão café",
-  "email": "balbino.taw@gmail.com",
+  "email": "balbino22.taw@gmail.com",
   "password": "123456789",
   "confirmPassword": "123456789"
 

@@ -8,4 +8,5 @@ import (
 func Application(app *fiber.App) {
 	app.Post("/vendedor/cadastrar", controller.AddVendor)
 	app.Post("/vendedor/login", controller.LoginVendor)
+	app.Post("/vendedor/:id/produto/cadastrar", controller.AddProductVendor)
 }

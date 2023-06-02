@@ -1,7 +1,6 @@
 package messagesHttp
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 )
@@ -33,19 +32,65 @@ func InitializerMessage() {
 	}
 	MessageErros["errorString"] = &MessageErro{
 		Status:  401,
-		Message: "Email or Password incorrect",
+		Message: "data incorrect",
 	}
 	MessageErros["WriteException"] = &MessageErro{
 		Status:  400,
 		Message: "Email already exist",
 	}
+	MessageErros["ErrSession"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+
+	}
+	MessageErros["ErrTransaction"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["ErrClientDisconnected"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["ErrTransactionInProgress"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["ErrTransactRetryable"] = &MessageErro{
+		Status: 500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["ErrTransactWriteConcern"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["ErrTransactCallback"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["CommandError"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["CursorNotFoundError"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+	MessageErros["ErrNilDocument"] = &MessageErro{
+		Status:  404,
+		Message: "Not Found",
+	}
+	MessageErros["WriteError"] = &MessageErro{
+		Status:  500,
+		Message: "Internal Server Error",
+	}
+
+
 
 }
 
 func GetError(err error) *MessageErro {
 	typeObj := reflect.TypeOf(err).String()
 	typeSep := strings.Split(typeObj, ".")
-	fmt.Println(typeSep)
 	return MessageErros[typeSep[len(typeSep)-1]]
 
 }

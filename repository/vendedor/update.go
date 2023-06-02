@@ -3,15 +3,15 @@ package vendorRepository
 import (
 	"e-commerce/db"
 	"e-commerce/model"
-	"github.com/google/uuid"
 	"github.com/valyala/fasthttp"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func Update(context *fasthttp.RequestCtx, uuid *uuid.UUID, vendor *model.Vendor) (err error) {
+func Update(context *fasthttp.RequestCtx, id *primitive.ObjectID, vendor *model.Vendor) (err error) {
 	query := bson.D{{
-		Key:   "uuid",
-		Value: uuid,
+		Key:   "_id",
+		Value: id,
 	}}
 	update := bson.D{
 		{

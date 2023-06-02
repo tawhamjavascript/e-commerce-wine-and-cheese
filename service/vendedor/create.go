@@ -4,7 +4,8 @@ import (
 	"e-commerce/model"
 	vendorRepository "e-commerce/repository/vendedor"
 	"e-commerce/service/messagesHttp"
-	vendoValidate "e-commerce/validate/vendedor"
+	"e-commerce/validate"
+
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
@@ -16,7 +17,7 @@ func Create(c *fiber.Ctx) (messageError *messagesHttp.MessageErro) {
 	if err != nil {
 		return messagesHttp.GetError(err)
 	}
-	err = vendoValidate.ValidateRegisterVendor(&registerVendor)
+	err = validate.ValidateRegisterVendor(&registerVendor)
 	if err != nil {
 		return messagesHttp.GetError(err)
 	}

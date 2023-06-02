@@ -1,26 +1,30 @@
 package model
 
 import (
-	"github.com/google/uuid"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Product struct {
-	Uuid        uuid.UUID  `bson:"id"`
-	Name        string     `bson:"name"`
-	Description string     `bson:"description"`
-	Price       string     `bson:"price"`
-	Photo       string     `bson:"photo"`
-	Rating      float64    `bson:"rating"`
-	Vendor      uuid.UUID  `bson:"vendor"`
-	Comments    []Comments `bson:"comments"`
+	ID          primitive.ObjectID  `bson:"_id"`
+	Name        *string             `bson:"name"`
+	Description *string             `bson:"description"`
+	Price       *float64            `bson:"price"`
+	Photo       *string             `bson:"photo"`
+	Rating      float64             `bson:"rating" default:"0.0"`
+	Vendor      *primitive.ObjectID `bson:"vendor"`
+	Comments    *[]*Comments        `bson:"comments"`
 }
 
 type RegisterProduct struct {
-	Uuid        uuid.UUID `json:"uuid" validator:"required"`
-	Name        string    `json:"name" validator:"required,min=8,max=50"`
-	Description string    `json:"description" validator:"required,min=10,max=100"`
-	Price       string    `bson:"price" validator:"required,numeric"`
-	Photo       string    `bson:"photo" validator:"required"`
-	Rating      float64   `bson:"rating" validator:"required,numeric"`
-	Vendor      uuid.UUID `bson:"vendor" validator:"required"`
+	Name        string             `json:"name" validate:"required,min=2,max=50,name"`
+	Description string             `json:"description" validate:"required,min=8,max=100,description"`
+	Price       float64            `json:"price" validate:"required,numeric"`
+	Photo       string             `json:"photo" validate:"required,url"`
+}
+
+type UpdateProduct struct {
+	Name        string             `json:"name" validate:"required,min=2,max=50,name"`
+	Description string             `json:"description" validate:"required,min=8,max=100,description"`
+	Price       float64            `json:"price" validate:"required,numeric"`
+	Photo       string             `json:"photo" validate:"required,url"`
 }

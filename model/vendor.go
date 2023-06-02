@@ -16,16 +16,16 @@ type Vendor struct {
 }
 
 type RegisterVendor struct {
-	Name            string `json:"name" validator:"required,min=8,max=50,name"`
-	Description     string `json:"description" validator:"required,min=8,max=50,description"`
-	Email           string `json:"email" validator:"required,email"`
-	Password        string `json:"password" validator:"required,min=8,max=50"`
-	ConfirmPassword string `json:"confirmPassword" validator:"required,min=8,max=50"`
+	Name            string `json:"name" validate:"required,min=8,max=50,name"`
+	Description     string `json:"description" validate:"required,min=8,max=50,description"`
+	Email           string `json:"email" validate:"required,email"`
+	Password        string `json:"password" validate:"required,min=8,max=50"`
+	ConfirmPassword string `json:"confirmPassword" validate:"required,min=8,max=50"`
 }
 
 type SignInVendor struct {
-	Email    string `json:"Email" validator:"required,email"`
-	Password string `json:"Password" validator:"required,min=8,max=50"`
+	Email    string `json:"Email" validate:"required,email"`
+	Password string `json:"Password" validate:"required,min=8,max=50"`
 }
 
 type SignInVendoDatabase struct {
