@@ -1,4 +1,4 @@
-package productRepositoy
+package productRepository
 
 import (
 	"e-commerce/db"

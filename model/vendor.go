@@ -12,7 +12,7 @@ type Vendor struct {
 	Email       string               `bson:"email"`
 	Password    []byte               `bson:"password"`
 	Products    []primitive.ObjectID `bson:"products" default:"[]"`
-	Sold        []Product            `bson:"sold" default:"[]"`
+	Sold        []primitive.ObjectID           `bson:"sold" default:"[]"`
 }
 
 type RegisterVendor struct {

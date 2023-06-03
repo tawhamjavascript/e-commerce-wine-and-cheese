@@ -36,7 +36,7 @@ func Create(c *fiber.Ctx) (messageError *messagesHttp.MessageErro) {
 		Email:       registerVendor.Email,
 		Password:    hash,
 		Products:    []primitive.ObjectID{},
-		Sold:        []model.Product{},
+		Sold:        []primitive.ObjectID{},
 	}
 	err = vendorRepository.Create(vendor, c.Context())
 	if err != nil {

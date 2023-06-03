@@ -1,7 +1,6 @@
 package model
 
 import (
-	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -10,10 +9,7 @@ type Client struct {
 	Password  string             `bson:"password"`
 	Photo     string             `bson:"photo"`
 	Phone     string             `bson:"phone"`
-	Uuid      uuid.UUID          `bson:"uuid"`
 	Email     string             `bson:"email"`
-	Purchases []Product          `bson:"purchases"`
-	Comments  []Comments         `bson:"comments"`
 }
 
 type SignUpClient struct {

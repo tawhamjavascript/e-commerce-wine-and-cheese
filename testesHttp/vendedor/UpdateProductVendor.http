@@ -1,8 +1,8 @@
-POST http://localhost:8000/vendedor/6475f5858c9f808a05e6241a/produto/cadastrar HTTP/1.1
+PUT http://localhost:8000/vendedor/produto/editar/647ba7859ca5f92039385b88 HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "arroz",
+  "name": "arroz macarrão",
   "description": "arroz que delícia",
   "price": 2.99,
   "photo": "https://images.unsplash.com/photo-1516684732162-798a0062be99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80"

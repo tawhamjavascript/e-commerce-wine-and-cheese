@@ -2,17 +2,25 @@ package vendorRepository
 
 import (
 	"e-commerce/db"
-	"github.com/google/uuid"
-	"github.com/valyala/fasthttp"
-	"go.mongodb.org/mongo-driver/bson"
 	"log"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func Delete(context *fasthttp.RequestCtx, id uuid.UUID) (err error) {
-	query := bson.D{{Key: "uuid", Value: id}}
-	_, err = db.Conn.Collections["vendor"].DeleteOne(context, &query)
-	if err != nil {
-		log.Println("Error deleting vendor")
-	}
-	return err
+func DeleteProduct(ctx mongo.SessionContext, productID *primitive.ObjectID, vendorID *primitive.ObjectID) (err error) {
+    query := bson.M{
+        "_id":        vendorID,
+    }
+    update := bson.M{
+        "$pull": bson.M{
+            "products": productID,
+        },
+    }
+    _, err = db.Conn.Collections["vendor"].UpdateOne(ctx, query, update)
+    if err != nil {
+        log.Println("An error occurred during deletion")
+        return err
+    }
+    return nil
 }

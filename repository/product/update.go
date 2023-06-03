@@ -1,16 +1,15 @@
-package productRepositoy
+package productRepository
 
 import (
 	"e-commerce/db"
 	"e-commerce/model"
-
+	"github.com/valyala/fasthttp"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 
-func UpdateProduct(ctx mongo.SessionContext, id *primitive.ObjectID, product *model.UpdateProduct)(err error) {
+func UpdateProduct(ctx *fasthttp.RequestCtx, id *primitive.ObjectID, product *model.UpdateProduct)(err error) {
 	query := bson.M{
 		"_id": id,
 	}

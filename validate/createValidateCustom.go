@@ -5,6 +5,8 @@ import (
 	"regexp"
 )
 
+
+
 func CreateCustomValidations(validate *validator.Validate) {
 	validate.RegisterValidation("name", validateNameOfUser)
 	validate.RegisterValidation("description", validateDescription)

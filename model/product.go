@@ -12,7 +12,6 @@ type Product struct {
 	Photo       *string             `bson:"photo"`
 	Rating      float64             `bson:"rating" default:"0.0"`
 	Vendor      *primitive.ObjectID `bson:"vendor"`
-	Comments    *[]*Comments        `bson:"comments"`
 }
 
 type RegisterProduct struct {

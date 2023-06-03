@@ -2,12 +2,9 @@ package productService
 
 import (
 	"e-commerce/db"
-	"e-commerce/model"
 	productRepositoy "e-commerce/repository/product"
 	vendorRepository "e-commerce/repository/vendedor"
 	"e-commerce/service/messagesHttp"
-	"e-commerce/validate"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -16,35 +13,17 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/writeconcern"
 )
 
-func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
-	var productRegister model.RegisterProduct
-	if err := c.BodyParser(&productRegister); err != nil {
-		return messagesHttp.GetError(err)
-	}
 
-	idParamVendor := c.Params("idVendor")
-	idVendor, err := primitive.ObjectIDFromHex(idParamVendor)
-	if err != nil {
-		fmt.Println(err)
-		return messagesHttp.GetError(err)
-	}
+func Delete(c * fiber.Ctx) *messagesHttp.MessageErro {
 
-	err = validate.ValidateRegisterProduct(&productRegister)
+	idVendor, erro := primitive.ObjectIDFromHex(c.Params("idVendor"))
+	if erro != nil {
+		return messagesHttp.GetError(erro)
+	}
+	idProduct, err  := primitive.ObjectIDFromHex(c.Params("idProduct"))
 	if err != nil {
 		return messagesHttp.GetError(err)
 	}
-
-	productDatabase := &model.Product{
-		ID:          primitive.NewObjectID(),
-		Name:        &productRegister.Name,
-		Description: &productRegister.Description,
-		Price:       &productRegister.Price,
-		Photo:       &productRegister.Photo,
-		Rating:      0.0,
-		Vendor:      &idVendor,
-	}
-
-
 	session, erro := db.Conn.Client.StartSession()
 	if erro != nil {
 		return messagesHttp.GetError(erro)
@@ -57,12 +36,12 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 			return err
 			
 		}
-		err = productRepositoy.Create(sessionContext, productDatabase)
+		err = productRepositoy.Delete(sessionContext, &idProduct)
 		if err != nil {
 			session.AbortTransaction(sessionContext)
 			return err
 		}
-		err = vendorRepository.AddProductVendor(sessionContext, &idVendor, &productDatabase.ID)
+		err = vendorRepository.DeleteProduct(sessionContext, &idProduct, &idVendor)
 		if err != nil {
 			session.AbortTransaction(sessionContext)
 			return err
@@ -79,6 +58,4 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 		return messagesHttp.GetError(err)
 	}
 	return nil
-	
-
 }

@@ -14,3 +14,10 @@ func ValidateRegisterProduct(product *model.RegisterProduct) (err error) {
 	err = validate.Struct(product)
 	return err
 }
+
+func ValidateUpdateProduct(product *model.UpdateProduct) (err error) {
+	validate := validator.New()
+	CreateCustomValidations(validate)
+	return validate.Struct(product)
+
+}
