@@ -17,10 +17,10 @@ func AddVendor(c *fiber.Ctx) error {
 
 func LoginVendor(c *fiber.Ctx) error {
 	message := vendedorService.Login(c)
-	if message == nil {
-		return c.Status(fiber.StatusOK).SendStatus(fiber.StatusOK)
+	if message != nil {
+		return c.Status(message.Status).SendString(message.Message)
 	}
-	return c.Status(message.Status).SendString(message.Message)
+	return c.Next()
 }
 
 func AddProductVendor(c *fiber.Ctx) error {

@@ -1,1 +1,1 @@
-DELETE http://localhost:8000/vendedor/6475f5858c9f808a05e6241a/produto/deletar/647ba7859ca5f92039385b88 HTTP/1.1
+DELETE http://localhost:8000/vendedor/produto/deletar/647ba7859ca5f92039385b88 HTTP/1.1

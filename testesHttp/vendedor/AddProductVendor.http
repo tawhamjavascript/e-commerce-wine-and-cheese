@@ -1,11 +1,11 @@
-POST http://localhost:8000/vendedor/6475f5858c9f808a05e6241a/produto/cadastrar HTTP/1.1
+POST http://localhost:8000/vendedor/produto/cadastrar HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODYwOTM2MzksImlzcyI6ImUtY29tbWVyY2Ugb2YgbWFuZ2EiLCJzdWIiOiI2NDdlNjZiNmU3ZmI0ZDIwZGViMjM1ZmEifQ.0lPHaM9_JENz6l3XNeMgdq4c_hYZbGzm80mS0oxgBCpHkRxZnbv0CzD6LIgOCsHT2T1mHIkKm8qTzT_XRs4OJA
 
 {
   "name": "arroz",
   "description": "arroz que delícia",
   "price": 2.99,
   "photo": "https://images.unsplash.com/photo-1516684732162-798a0062be99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80"
-
 
 }

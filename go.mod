@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/go-playground/validator/v10 v10.13.0
 	github.com/gofiber/fiber/v2 v2.46.0
+	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/spf13/viper v1.15.0
 	github.com/valyala/fasthttp v1.47.0
 	go.mongodb.org/mongo-driver v1.11.6

@@ -16,10 +16,7 @@ import (
 
 func Delete(c * fiber.Ctx) *messagesHttp.MessageErro {
 
-	idVendor, erro := primitive.ObjectIDFromHex(c.Params("idVendor"))
-	if erro != nil {
-		return messagesHttp.GetError(erro)
-	}
+	idVendor, _ := primitive.ObjectIDFromHex(c.Locals("id").(string))
 	idProduct, err  := primitive.ObjectIDFromHex(c.Params("idProduct"))
 	if err != nil {
 		return messagesHttp.GetError(err)

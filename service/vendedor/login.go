@@ -29,5 +29,6 @@ func Login(c *fiber.Ctx) *messagesHttp.MessageErro {
 
 		return messagesHttp.GetError(err)
 	}
+	c.Locals("id", user.Id)
 	return nil
 }

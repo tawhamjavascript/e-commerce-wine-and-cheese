@@ -7,7 +7,6 @@ import (
 	vendorRepository "e-commerce/repository/vendedor"
 	"e-commerce/service/messagesHttp"
 	"e-commerce/validate"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -22,14 +21,9 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 		return messagesHttp.GetError(err)
 	}
 
-	idParamVendor := c.Params("idVendor")
-	idVendor, err := primitive.ObjectIDFromHex(idParamVendor)
-	if err != nil {
-		fmt.Println(err)
-		return messagesHttp.GetError(err)
-	}
+	idVendor, _ := primitive.ObjectIDFromHex(c.Locals("id").(string))
 
-	err = validate.ValidateRegisterProduct(&productRegister)
+	err := validate.ValidateRegisterProduct(&productRegister)
 	if err != nil {
 		return messagesHttp.GetError(err)
 	}

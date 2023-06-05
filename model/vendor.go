@@ -7,12 +7,11 @@ import (
 type Vendor struct {
 	ID          primitive.ObjectID   `bson:"_id"`
 	Name        string               `bson:"name"`
-	Rating      float64              `bson:"rating" default:"0.0"`
 	Description string               `bson:"description"`
 	Email       string               `bson:"email"`
 	Password    []byte               `bson:"password"`
 	Products    []primitive.ObjectID `bson:"products" default:"[]"`
-	Sold        []primitive.ObjectID           `bson:"sold" default:"[]"`
+	Sold        []primitive.ObjectID `bson:"sold" default:"[]"`
 }
 
 type RegisterVendor struct {

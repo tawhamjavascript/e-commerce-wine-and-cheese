@@ -49,6 +49,7 @@ func Create(c *fiber.Ctx) (messageError *messagesHttp.MessageErro) {
 		}
 		return errorMensage
 	}
+	c.Locals("id", vendor.ID)
 	return nil
 
 }

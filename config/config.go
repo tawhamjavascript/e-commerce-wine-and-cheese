@@ -9,19 +9,22 @@ type Config struct {
 	USER     string `mapstructure:"USER"`
 	PASSWORD string `mapstructure:"PASSWORD"`
 	URL      string `mapstructure:"DB_URI"`
+	SecretPassword string `mapstructure:"SECRET_PASSWORD"`
 }
 
-func LoadConfig() (config *Config) {
+var Configs *Config
+
+func LoadConfig() (*Config) {
 	viper.SetConfigFile(".env")
 
 	if err := viper.ReadInConfig(); err != nil {
 		log.Panicf("Error while reading config file %v", err)
 
 	}
-	err := viper.Unmarshal(&config)
+	err := viper.Unmarshal(&Configs)
 	if err != nil {
 		panic("Error to read file of config")
 	}
-	return
+	return Configs
 
 }
