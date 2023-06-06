@@ -7,23 +7,39 @@ import (
 type Product struct {
 	ID          primitive.ObjectID  `bson:"_id"`
 	Name        *string             `bson:"name"`
-	Description *string             `bson:"description"`
+	Chapter     *uint16             `bson:"chapter"`
 	Price       *float64            `bson:"price"`
+	Description *string             `bson:"description"`
+	Author 		*string             `bson:"author"`
+	Genre 	 	*string             `bson:"genre"`
+	Publication *string             `bson:"publication"`
 	Photo       *string             `bson:"photo"`
-	Rating      float64             `bson:"rating" default:"0.0"`
 	Vendor      *primitive.ObjectID `bson:"vendor"`
 }
 
-type RegisterProduct struct {
-	Name        string             `json:"name" validate:"required,min=2,max=50,name"`
-	Description string             `json:"description" validate:"required,min=8,max=100,description"`
+type RegisterUpdateProduct struct {
+	Name        string             `json:"name" validate:"required,min=2,max=50,nameManga"`
+	Chapter     uint16             `json:"chapter" validate:"required,min=2,max=50,numeric"`
 	Price       float64            `json:"price" validate:"required,numeric"`
+	Description string             `json:"description" validate:"required,min=8,max=100,description"`
+	Author 		string             `json:"author" validate:"required,min=2,max=50,general"`
+	Genre 	 	string             `json:"genre" validate:"required,min=2,max=50,general"`
+	Publication string             `json:"publication" validate:"required,min=2,max=50,general"`
 	Photo       string             `json:"photo" validate:"required,url"`
+
 }
 
-type UpdateProduct struct {
-	Name        string             `json:"name" validate:"required,min=2,max=50,name"`
-	Description string             `json:"description" validate:"required,min=8,max=100,description"`
-	Price       float64            `json:"price" validate:"required,numeric"`
-	Photo       string             `json:"photo" validate:"required,url"`
+type ProductView struct {
+	ID          primitive.ObjectID `json:"id" bson:"_id"`
+	Name        string             `json:"name" bson:"name"`
+	Chapter     uint16             `json:"chapter" bson:"chapter"`
+	Price       float64            `json:"price" bson:"price"`
+	Description string             `json:"description" bson:"description"`
+	Author 		string             `json:"author" bson:"author"`
+	Genre 	 	string             `json:"genre" bson:"genre"`
+	Publication string             `json:"publication" bson:"publication"`
+	Photo       string             `json:"photo" bson:"photo"`
+	Vendor      primitive.ObjectID `json:"idVendor" bson:"vendor"`
+
 }
+

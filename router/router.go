@@ -10,7 +10,11 @@ import (
 func Application(app *fiber.App) {
 	app.Post("/vendedor/cadastrar", controller.AddVendor)
 	app.Post("/vendedor/login", controller.LoginVendor,  middleware.CreateToken)
-	app.Post("/vendedor/produto/cadastrar", middleware.Auth, controller.AddProductVendor)
-	app.Put("/vendedor/produto/editar/:idProduct", middleware.Auth, controller.UpdateVendorProduct)
-	app.Delete("/vendedor/produto/deletar/:idProduct", middleware.Auth, controller.DeleteVendorProduct)
+	path := app.Group("/")
+
+	apiVendor:= path.Group("/vendedor", middleware.Auth)
+	apiVendor.Post("/produto/cadastrar", controller.AddProductVendor)
+	apiVendor.Put("/produto/editar/:idProduct", controller.UpdateVendorProduct)
+	apiVendor.Delete("/produto/deletar/:idProduct",controller.DeleteVendorProduct)
+	apiVendor.Get("/produto/listar", controller.GetAllVendorProduct)
 }

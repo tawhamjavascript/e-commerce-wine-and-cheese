@@ -11,7 +11,7 @@ import (
 )
 
 func UpdateProduct(c *fiber.Ctx) *messagesHttp.MessageErro{
-	var productUpdate model.UpdateProduct
+	var productUpdate model.RegisterUpdateProduct
 	idProduct, err := primitive.ObjectIDFromHex(c.Params("idProduct"))
 	if err != nil {
 		return messagesHttp.GetError(err)

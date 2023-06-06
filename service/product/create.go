@@ -16,7 +16,7 @@ import (
 )
 
 func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
-	var productRegister model.RegisterProduct
+	var productRegister model.RegisterUpdateProduct
 	if err := c.BodyParser(&productRegister); err != nil {
 		return messagesHttp.GetError(err)
 	}
@@ -31,10 +31,13 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 	productDatabase := &model.Product{
 		ID:          primitive.NewObjectID(),
 		Name:        &productRegister.Name,
-		Description: &productRegister.Description,
+		Chapter:     &productRegister.Chapter,
 		Price:       &productRegister.Price,
+		Description: &productRegister.Description,
+		Author: 	 &productRegister.Author,
+		Genre: 		 &productRegister.Genre,
+		Publication: &productRegister.Publication,
 		Photo:       &productRegister.Photo,
-		Rating:      0.0,
 		Vendor:      &idVendor,
 	}
 

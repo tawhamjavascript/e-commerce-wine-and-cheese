@@ -8,14 +8,14 @@ import (
 
 
 
-func ValidateRegisterProduct(product *model.RegisterProduct) (err error) {
+func ValidateRegisterProduct(product *model.RegisterUpdateProduct) (err error) {
 	validate := validator.New()
 	CreateCustomValidations(validate)
 	err = validate.Struct(product)
 	return err
 }
 
-func ValidateUpdateProduct(product *model.UpdateProduct) (err error) {
+func ValidateUpdateProduct(product *model.RegisterUpdateProduct) (err error) {
 	validate := validator.New()
 	CreateCustomValidations(validate)
 	return validate.Struct(product)

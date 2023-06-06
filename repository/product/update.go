@@ -9,7 +9,7 @@ import (
 )
 
 
-func UpdateProduct(ctx *fasthttp.RequestCtx, id *primitive.ObjectID, product *model.UpdateProduct)(err error) {
+func UpdateProduct(ctx *fasthttp.RequestCtx, id *primitive.ObjectID, product *model.RegisterUpdateProduct)(err error) {
 	query := bson.M{
 		"_id": id,
 	}
@@ -22,12 +22,28 @@ func UpdateProduct(ctx *fasthttp.RequestCtx, id *primitive.ObjectID, product *mo
 					Value: product.Name,
 				},
 				{
-					Key: "description",
-					Value: product.Description,
+					Key: "chapter",
+					Value: product.Chapter,
 				},
 				{
 					Key: "price",
 					Value: product.Price,
+				},
+				{
+					Key: "description",
+					Value: product.Description,
+				},
+				{
+					Key: "author",
+					Value: product.Author,
+				},
+				{
+					Key: "genre",
+					Value: product.Genre,
+				},
+				{
+					Key: "publication",
+					Value: product.Publication,
 				},
 				{
 					Key: "photo",

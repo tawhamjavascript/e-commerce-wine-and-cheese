@@ -10,7 +10,7 @@ import (
 )
 
 
-func GetProduct(ctx mongo.SessionContext, id *primitive.ObjectID) (*model.Product, error) {
+func GetProduct(ctx mongo.SessionContext, id *primitive.ObjectID) (*model.ProductView, error) {
 	query := bson.M{
 		"_id": id,
 	}
