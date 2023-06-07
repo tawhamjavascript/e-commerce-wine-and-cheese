@@ -56,3 +56,13 @@ func GetAllVendorProduct(c *fiber.Ctx) error {
 	}
 	return c.Status(message.Status).SendString(message.Message)
 }
+
+func GetVendorProduct(c *fiber.Ctx) error {
+	product, message := productService.GetProduct(c)
+	if message == nil {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"product": product,
+		})
+	}
+	return c.Status(message.Status).SendString(message.Message)
+}

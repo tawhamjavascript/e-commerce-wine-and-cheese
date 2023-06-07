@@ -17,4 +17,5 @@ func Application(app *fiber.App) {
 	apiVendor.Put("/produto/editar/:idProduct", controller.UpdateVendorProduct)
 	apiVendor.Delete("/produto/deletar/:idProduct",controller.DeleteVendorProduct)
 	apiVendor.Get("/produto/listar", controller.GetAllVendorProduct)
+	apiVendor.Get("/produto/:id", controller.GetVendorProduct)
 }
