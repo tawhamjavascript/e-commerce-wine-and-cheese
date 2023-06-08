@@ -11,6 +11,7 @@ func CreateCustomValidations(validate *validator.Validate) {
 	validate.RegisterValidation("nameManga", validateNameManga)
 	validate.RegisterValidation("description", validateDescription)
 	validate.RegisterValidation("general", validateGeneral)
+	validate.RegisterValidation("name", validateNameUser)
 }
 
 func validateNameManga(fl validator.FieldLevel) bool {
@@ -18,6 +19,12 @@ func validateNameManga(fl validator.FieldLevel) bool {
 	regex := regexp.MustCompile(`^[a-zA-ZÀ-ÿ ]+$`)
 	return regex.MatchString(nameManga)
 }
+func validateNameUser(fl validator.FieldLevel) bool {
+	nameUser := fl.Field().String()
+	regex := regexp.MustCompile(`^[a-zA-ZÀ-ÿ ]+$`)
+	return regex.MatchString(nameUser)
+}
+
 
 func validateDescription(fl validator.FieldLevel) bool {
 	description := fl.Field().String()

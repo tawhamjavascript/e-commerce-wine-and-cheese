@@ -25,7 +25,7 @@ type RegisterUpdateProduct struct {
 	Author 		string             `json:"author" validate:"required,min=2,max=50,general"`
 	Genre 	 	string             `json:"genre" validate:"required,min=2,max=50,general"`
 	Publication string             `json:"publication" validate:"required,min=2,max=50,general"`
-	Photo       string             `json:"photo" validate:"required,url"`
+	Photo       string             `json:"image" validate:"required,url"`
 
 }
 
@@ -38,7 +38,7 @@ type ProductView struct {
 	Author 		string             `json:"author" bson:"author"`
 	Genre 	 	string             `json:"genre" bson:"genre"`
 	Publication string             `json:"publication" bson:"publication"`
-	Photo       string             `json:"photo" bson:"photo"`
+	Photo       string             `json:"image" bson:"photo"`
 	Vendor      primitive.ObjectID `json:"idVendor" bson:"vendor"`
 
 }

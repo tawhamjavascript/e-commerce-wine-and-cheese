@@ -12,7 +12,7 @@ import (
 
 func Auth(c *fiber.Ctx) error {
     // Get the token string from the Authorization header
-    authHeader := c.Get("Authorization")
+    authHeader := c.Get("Autorization")
     if authHeader == "" {
         return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Error to login user",
@@ -31,6 +31,7 @@ func Auth(c *fiber.Ctx) error {
         return []byte(config.Configs.SecretPassword), nil
     })
     if err != nil {
+        fmt.Println(err)
         return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Error to login user",
 		})

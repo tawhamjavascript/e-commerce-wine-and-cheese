@@ -7,6 +7,8 @@ import (
 	vendorRepository "e-commerce/repository/vendedor"
 	"e-commerce/service/messagesHttp"
 	"e-commerce/validate"
+	"fmt"
+	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -17,14 +19,17 @@ import (
 
 func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 	var productRegister model.RegisterUpdateProduct
+	fmt.Println(c.Locals("id"))
 	if err := c.BodyParser(&productRegister); err != nil {
+		log.Println("erro ao fazer o parse do body:" + err.Error())
 		return messagesHttp.GetError(err)
 	}
 
 	idVendor, _ := primitive.ObjectIDFromHex(c.Locals("id").(string))
-
+	
 	err := validate.ValidateRegisterProduct(&productRegister)
 	if err != nil {
+		log.Println("erro na validação dos dados:" + err.Error())
 		return messagesHttp.GetError(err)
 	}
 
@@ -44,6 +49,7 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 
 	session, erro := db.Conn.Client.StartSession()
 	if erro != nil {
+		fmt.Println("erro na criação da sessão:" + erro.Error())
 		return messagesHttp.GetError(erro)
 	}
 	defer session.EndSession(c.Context())
@@ -51,21 +57,26 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 	err = mongo.WithSession(c.Context(), session, func(sessionContext mongo.SessionContext) error {
 		err := session.StartTransaction(opts)
 		if err != nil {
+			fmt.Println("erro na no início da transação:" + erro.Error())
 			return err
 			
 		}
 		err = productRepositoy.Create(sessionContext, productDatabase)
 		if err != nil {
+			fmt.Println(erro.Error())
 			session.AbortTransaction(sessionContext)
 			return err
 		}
 		err = vendorRepository.AddProductVendor(sessionContext, &idVendor, &productDatabase.ID)
+		
 		if err != nil {
+			
 			session.AbortTransaction(sessionContext)
 			return err
 		}
 		err = session.CommitTransaction(sessionContext)
 		if err != nil {
+			fmt.Println(erro.Error())
 			session.AbortTransaction(sessionContext)
 			return err
 		}
@@ -73,9 +84,8 @@ func Create(c *fiber.Ctx) *messagesHttp.MessageErro {
 
 	})
 	if err != nil {
+		fmt.Println("erro na transação:" + erro.Error())
 		return messagesHttp.GetError(err)
 	}
 	return nil
-	
-
 }
