@@ -3,6 +3,7 @@ package middleware
 import (
 	"e-commerce/config"
 	"fmt"
+
 	"strings"
 	"time"
 
@@ -14,6 +15,7 @@ func Auth(c *fiber.Ctx) error {
     // Get the token string from the Authorization header
     authHeader := c.Get("Autorization")
     if authHeader == "" {
+        fmt.Println("sem token")
         return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Error to login user",
 		})
@@ -40,6 +42,7 @@ func Auth(c *fiber.Ctx) error {
     // Get the claims from the token
     claims, ok := token.Claims.(jwt.MapClaims)
     if !ok || !token.Valid {
+        fmt.Println(err)
         return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Error to login user",
 		})
@@ -48,6 +51,7 @@ func Auth(c *fiber.Ctx) error {
     // Check the issuer, subject, and expiration time
     expirationTime := int64(claims["exp"].(float64))
     if time.Now().Unix() > expirationTime {
+        fmt.Println(err)
         return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Token expired",
 		})
@@ -55,6 +59,7 @@ func Auth(c *fiber.Ctx) error {
 
     // Set the user ID in the context for use in the protected route
     c.Locals("id", claims["sub"].(string))
+
 
     // Call the next middleware or route handler
     return c.Next()

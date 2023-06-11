@@ -4,6 +4,8 @@ import (
 	productService "e-commerce/service/product"
 	vendedorService "e-commerce/service/vendedor"
 
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -70,7 +72,7 @@ func UpdateVendorProduct(c *fiber.Ctx) error {
 }
 
 func GetAllVendorProduct(c *fiber.Ctx) error {
-	products, message := productService.GetAll(c)
+	products, message := productService.GetAllProductVendor(c)
 	if message == nil {
 		return c.Status(fiber.StatusOK).JSON(products)
 	}
@@ -83,6 +85,19 @@ func GetVendorProduct(c *fiber.Ctx) error {
 	product, message := productService.GetProduct(c)
 	if message == nil {
 		return c.Status(fiber.StatusOK).JSON(product)
+	}
+	return c.Status(message.Status).JSON(fiber.Map{
+		"message": message.Message,
+	})
+}
+
+func GetAllVendorProductSold(c *fiber.Ctx) error {
+	log.Println("teste")
+	products, message := productService.GetAllProductSoldVendor(c)
+	log.Println(products)
+	if message == nil {
+		
+		return c.Status(fiber.StatusOK).JSON(products)
 	}
 	return c.Status(message.Status).JSON(fiber.Map{
 		"message": message.Message,

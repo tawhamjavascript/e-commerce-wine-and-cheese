@@ -19,7 +19,7 @@ type Product struct {
 
 type RegisterUpdateProduct struct {
 	Name        string             `json:"name" validate:"required,min=2,max=50,nameManga"`
-	Chapter     uint16             `json:"chapter" validate:"required,min=2,max=50,numeric"`
+	Chapter     uint16             `json:"chapter" validate:"required,numeric"`
 	Price       float64            `json:"price" validate:"required,numeric"`
 	Description string             `json:"description" validate:"required,min=8,max=100,description"`
 	Author 		string             `json:"author" validate:"required,min=2,max=50,general"`
@@ -43,3 +43,6 @@ type ProductView struct {
 
 }
 
+type Sold struct {
+	Products []ProductView `json:"products"`
+}
